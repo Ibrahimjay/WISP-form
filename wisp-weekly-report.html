@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WISP Weekly Report / Rapport Hebdomadaire</title>
+<title>WISP Site Report</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
   :root {
     --sun: #F5A623;
-    --dark: #1A1F2E;
-    --card: #242938;
-    --border: #333a50;
+    --dark: #111318;
+    --card: #1C2030;
+    --border: #2A3045;
     --text: #E8EAF0;
-    --muted: #8890A8;
-    --green: #2ECC71;
-    --red: #E74C3C;
-    --blue: #3498DB;
+    --muted: #7880A0;
+    --green: #27AE60;
+    --orange: #E67E22;
+    --red: #C0392B;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,96 +24,43 @@
   body {
     background: var(--dark);
     color: var(--text);
-    font-family: 'Barlow', sans-serif;
-    font-weight: 400;
-    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    padding-bottom: 100px;
   }
 
   /* HEADER */
   .header {
-    background: linear-gradient(135deg, #1A1F2E 0%, #242938 100%);
+    background: var(--card);
     border-bottom: 3px solid var(--sun);
-    padding: 20px 16px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    padding: 16px;
+    text-align: center;
   }
-  .header-inner {
-    max-width: 720px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .logo-badge {
-    width: 44px;
-    height: 44px;
-    background: var(--sun);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .logo-badge svg { width: 26px; height: 26px; fill: var(--dark); }
-  .header-titles h1 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.2rem;
+  .header h1 {
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--sun);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
-  .header-titles p {
-    font-size: 0.72rem;
+  .header p {
+    font-size: 0.75rem;
     color: var(--muted);
-    margin-top: 1px;
+    margin-top: 3px;
   }
 
-  /* PROGRESS BAR */
-  .progress-wrap {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 10px 16px 0;
-  }
-  .progress-track {
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: var(--sun);
-    border-radius: 2px;
-    transition: width 0.4s ease;
-    width: 0%;
-  }
-  .progress-label {
-    font-size: 0.68rem;
-    color: var(--muted);
-    margin-top: 5px;
-    text-align: right;
-  }
+  /* SECTIONS */
+  .wrap { max-width: 600px; margin: 0 auto; padding: 16px; }
 
-  /* MAIN CONTENT */
-  .main {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 20px 16px 80px;
-  }
-
-  /* SECTION */
-  .section {
+  .card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     overflow: hidden;
   }
-  .section-header {
-    padding: 14px 16px;
-    background: rgba(245,166,35,0.08);
+
+  .card-header {
+    padding: 13px 16px;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
@@ -121,205 +68,102 @@
     cursor: pointer;
     user-select: none;
   }
-  .section-num {
-    width: 26px;
-    height: 26px;
+  .card-header .num {
+    width: 24px; height: 24px;
     background: var(--sun);
     color: var(--dark);
     border-radius: 6px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
     font-weight: 700;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-  .section-title {
-    flex: 1;
-  }
-  .section-title strong {
-    display: block;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-  .section-title span {
-    font-size: 0.72rem;
-    color: var(--muted);
-    font-style: italic;
-  }
-  .chevron {
-    color: var(--muted);
-    font-size: 0.8rem;
-    transition: transform 0.3s;
-  }
-  .section.open .chevron { transform: rotate(180deg); }
-  .section-body {
-    display: none;
-    padding: 16px;
-  }
-  .section.open .section-body { display: block; }
+  .card-header .titles { flex: 1; }
+  .card-header .titles strong { display: block; font-size: 0.88rem; font-weight: 600; }
+  .card-header .titles small { font-size: 0.72rem; color: var(--muted); font-style: italic; }
+  .card-header .arrow { color: var(--muted); font-size: 0.7rem; transition: transform 0.2s; }
+  .card.open .arrow { transform: rotate(180deg); }
 
-  /* FORM ELEMENTS */
-  .field { margin-bottom: 14px; }
+  .card-body { display: none; padding: 16px; }
+  .card.open .card-body { display: block; }
+
+  /* FIELDS */
+  .field { margin-bottom: 13px; }
   .field:last-child { margin-bottom: 0; }
 
   label {
     display: block;
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 600;
     color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
     margin-bottom: 5px;
   }
-  label em {
-    font-weight: 400;
-    font-style: italic;
-    text-transform: none;
-    font-size: 0.72rem;
-    opacity: 0.8;
-  }
 
-  input[type="text"],
-  input[type="date"],
-  input[type="number"],
-  select,
-  textarea {
+  input, select, textarea {
     width: 100%;
     background: var(--dark);
     border: 1px solid var(--border);
     border-radius: 8px;
     color: var(--text);
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
     padding: 10px 12px;
     outline: none;
-    transition: border-color 0.2s;
     -webkit-appearance: none;
-    appearance: none;
+    transition: border-color 0.2s;
   }
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--sun);
+  input:focus, select:focus, textarea:focus { border-color: var(--sun); }
+  textarea { resize: vertical; min-height: 75px; }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237880A0'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
   }
-  textarea { resize: vertical; min-height: 80px; }
-  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238890A8' fill='none' stroke-width='2'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
 
-  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
   /* STATUS PILLS */
-  .status-group { display: flex; gap: 8px; flex-wrap: wrap; }
-  .status-pill {
-    padding: 7px 14px;
+  .pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    padding: 8px 14px;
     border-radius: 20px;
     border: 1px solid var(--border);
     font-size: 0.78rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
     background: transparent;
     color: var(--muted);
+    transition: all 0.15s;
+    font-family: 'Inter', sans-serif;
   }
-  .status-pill.active-green { background: rgba(46,204,113,0.2); border-color: var(--green); color: var(--green); }
-  .status-pill.active-orange { background: rgba(245,166,35,0.2); border-color: var(--sun); color: var(--sun); }
-  .status-pill.active-red { background: rgba(231,76,60,0.2); border-color: var(--red); color: var(--red); }
+  .pill.sel-green  { background: rgba(39,174,96,0.18);  border-color: var(--green);  color: var(--green); }
+  .pill.sel-orange { background: rgba(230,126,34,0.18); border-color: var(--orange); color: var(--orange); }
+  .pill.sel-red    { background: rgba(192,57,43,0.18);  border-color: var(--red);    color: var(--red); }
 
-  /* WORK PACKAGES */
-  .wp-card {
+  /* ACTIVITY ROWS */
+  .activity-row {
     background: var(--dark);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 14px;
+    padding: 13px;
     margin-bottom: 10px;
-  }
-  .wp-card:last-child { margin-bottom: 0; }
-  .wp-card-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--sun);
-    margin-bottom: 10px;
-  }
-
-  /* PHOTO UPLOAD */
-  .photo-upload-area {
-    border: 2px dashed var(--border);
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.2s;
     position: relative;
   }
-  .photo-upload-area:hover { border-color: var(--sun); }
-  .photo-upload-area input[type="file"] {
+  .activity-row .remove {
     position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-  }
-  .photo-upload-icon { font-size: 2rem; margin-bottom: 6px; }
-  .photo-upload-text { font-size: 0.8rem; color: var(--muted); }
-  .photo-upload-text strong { color: var(--sun); display: block; font-size: 0.85rem; }
-
-  .photo-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-top: 10px;
-  }
-  .photo-thumb {
-    aspect-ratio: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-    background: var(--dark);
-    border: 1px solid var(--border);
-  }
-  .photo-thumb img { width: 100%; height: 100%; object-fit: cover; }
-  .photo-thumb .remove-photo {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    background: rgba(231,76,60,0.9);
+    top: 10px; right: 10px;
+    background: none;
     border: none;
-    color: white;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    font-size: 0.7rem;
+    color: var(--muted);
+    font-size: 1rem;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    line-height: 1;
   }
-  .photo-caption-input {
-    width: 100%;
-    margin-top: 4px;
-    font-size: 0.72rem;
-    padding: 5px 8px;
-    background: var(--dark);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
-  }
-  .photo-item { margin-bottom: 10px; }
+  .activity-row .remove:hover { color: var(--red); }
 
-  /* RISK ITEMS */
-  .risk-item {
-    background: var(--dark);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 8px;
-  }
   .add-btn {
     width: 100%;
     padding: 10px;
@@ -330,575 +174,473 @@
     font-size: 0.82rem;
     cursor: pointer;
     transition: all 0.2s;
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Inter', sans-serif;
+    margin-top: 4px;
   }
   .add-btn:hover { border-color: var(--sun); color: var(--sun); }
 
-  /* GENERATE BUTTON */
-  .generate-wrap {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 12px 16px;
-    background: linear-gradient(to top, var(--dark) 60%, transparent);
-    z-index: 50;
+  /* PHOTOS */
+  .photo-drop {
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    padding: 22px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    position: relative;
   }
-  .generate-btn {
+  .photo-drop:hover { border-color: var(--sun); }
+  .photo-drop input {
+    position: absolute; inset: 0;
+    opacity: 0; cursor: pointer;
+    width: 100%; height: 100%;
+    padding: 0; border: none; background: none;
+  }
+  .photo-drop .icon { font-size: 1.8rem; display: block; margin-bottom: 6px; }
+  .photo-drop .txt { font-size: 0.8rem; color: var(--muted); }
+  .photo-drop .txt strong { color: var(--sun); display: block; font-size: 0.85rem; }
+
+  .photo-list { margin-top: 12px; }
+  .photo-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+  .photo-item img { width: 64px; height: 64px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
+  .photo-item .cap { flex: 1; }
+  .photo-item .cap input { font-size: 0.82rem; padding: 7px 10px; }
+  .photo-item .del {
+    background: none; border: none;
+    color: var(--muted); cursor: pointer;
+    font-size: 1rem; padding: 2px;
+  }
+  .photo-item .del:hover { color: var(--red); }
+
+  /* SUBMIT */
+  .submit-wrap {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    padding: 12px 16px;
+    background: linear-gradient(to top, var(--dark) 70%, transparent);
+  }
+  .submit-btn {
     display: block;
-    width: 100%;
-    max-width: 720px;
+    width: 100%; max-width: 600px;
     margin: 0 auto;
-    padding: 16px;
+    padding: 15px;
     background: var(--sun);
     color: var(--dark);
     border: none;
     border-radius: 12px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
     cursor: pointer;
     transition: opacity 0.2s;
   }
-  .generate-btn:hover { opacity: 0.9; }
-  .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .submit-btn:hover { opacity: 0.9; }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
   /* MODAL */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
+  .overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.8);
     z-index: 200;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
+    align-items: center; justify-content: center;
+    padding: 20px;
   }
-  .modal-overlay.active { display: flex; }
+  .overlay.on { display: flex; }
   .modal {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    width: 100%;
-    max-width: 480px;
-    padding: 24px;
+    border-radius: 14px;
+    padding: 28px 22px;
     text-align: center;
+    width: 100%; max-width: 360px;
   }
-  .modal-icon { font-size: 2.5rem; margin-bottom: 12px; }
-  .modal h2 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .modal p { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
-  .modal-spinner {
-    width: 36px;
-    height: 36px;
+  .modal .icon { font-size: 2.2rem; margin-bottom: 10px; }
+  .modal h3 { font-size: 1.05rem; margin-bottom: 8px; }
+  .modal p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; margin-bottom: 18px; }
+  .spinner {
+    width: 34px; height: 34px;
     border: 3px solid var(--border);
     border-top-color: var(--sun);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
-    margin: 0 auto 16px;
+    margin: 0 auto 14px;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   .modal-btn {
-    padding: 12px 28px;
+    padding: 11px 24px;
     background: var(--sun);
     color: var(--dark);
-    border: none;
-    border-radius: 10px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin: 4px;
+    border: none; border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700; font-size: 0.9rem;
+    cursor: pointer; margin: 4px;
   }
-  .modal-btn.secondary {
+  .modal-btn.sec {
     background: transparent;
     color: var(--muted);
     border: 1px solid var(--border);
-  }
-
-  /* REPORT PREVIEW */
-  .report-preview {
-    display: none;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 20px 16px 100px;
-  }
-  .report-preview.active { display: block; }
-  .report-content {
-    background: white;
-    color: #1a1a1a;
-    border-radius: 12px;
-    padding: 24px;
-    font-family: 'Barlow', sans-serif;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    white-space: pre-wrap;
-  }
-  .back-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--muted);
-    font-size: 0.85rem;
-    cursor: pointer;
-    margin-bottom: 14px;
-    background: none;
-    border: none;
-    padding: 0;
-  }
-  .back-btn:hover { color: var(--text); }
-
-  .download-btn {
-    display: block;
-    width: 100%;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 16px;
-    background: var(--green);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-
-  /* HELPERS */
-  .hint {
-    font-size: 0.72rem;
-    color: var(--muted);
-    font-style: italic;
-    margin-top: 5px;
-  }
-  .divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
-
-  @media print {
-    body { background: white; }
-    .header, .generate-wrap, .back-btn { display: none; }
-    .report-content { box-shadow: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
-  <div class="header-inner">
-    <div class="logo-badge">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="4"/>
-        <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l-1.41 1.41M6.34 17.66l-1.41 1.41"/>
-        <path stroke-width="2" stroke="currentColor" fill="none" d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l-1.41 1.41M6.34 17.66l-1.41 1.41"/>
-      </svg>
-    </div>
-    <div class="header-titles">
-      <h1>WISP Weekly Report</h1>
-      <p>Rapport Hebdomadaire — Waterloo Solar Power Plant</p>
-    </div>
-  </div>
-  <div class="progress-wrap">
-    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="progress-label" id="progressLabel">0% complete</div>
-  </div>
+  <h1>☀️ WISP Site Report</h1>
+  <p>Waterloo Innovent Solar Park — Weekly Data Collection</p>
 </div>
 
-<!-- FORM -->
-<div class="main" id="formView">
+<div class="wrap">
 
-  <!-- SECTION 1: PROJECT ID -->
-  <div class="section open" data-section="1">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-num">1</div>
-      <div class="section-title">
-        <strong>Project Identification / Identification du Projet</strong>
-        <span>General info — Informations générales</span>
+  <!-- 1. IDENTIFICATION -->
+  <div class="card open" id="s1">
+    <div class="card-header" onclick="toggle('s1')">
+      <div class="num">1</div>
+      <div class="titles">
+        <strong>Identification</strong>
+        <small>Author, week, dates / Auteur, semaine, dates</small>
       </div>
-      <span class="chevron">▼</span>
+      <span class="arrow">▼</span>
     </div>
-    <div class="section-body">
+    <div class="card-body">
       <div class="field">
-        <label>Report Author / Auteur du Rapport</label>
-        <input type="text" id="author" placeholder="Full name / Nom complet">
+        <label>Your Name / Votre Nom</label>
+        <input type="text" id="author" placeholder="Full name">
       </div>
-      <div class="row-2">
+      <div class="row2">
         <div class="field">
-          <label>Week Number / Semaine N°</label>
+          <label>Week No. / Semaine N°</label>
           <input type="number" id="weekNum" min="1" max="52" placeholder="e.g. 12">
         </div>
         <div class="field">
-          <label>Report Date / Date</label>
+          <label>Date</label>
           <input type="date" id="reportDate">
         </div>
       </div>
-      <div class="row-2">
+      <div class="row2">
         <div class="field">
-          <label>Period From / Du</label>
-          <input type="date" id="periodFrom">
+          <label>From / Du</label>
+          <input type="date" id="dateFrom">
         </div>
         <div class="field">
-          <label>Period To / Au</label>
-          <input type="date" id="periodTo">
+          <label>To / Au</label>
+          <input type="date" id="dateTo">
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 2: SITE OVERVIEW -->
-  <div class="section" data-section="2">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-num">2</div>
-      <div class="section-title">
-        <strong>Site Overview / Vue d'ensemble du Chantier</strong>
-        <span>Summary of week — Résumé de la semaine</span>
+  <!-- 2. SITE OVERVIEW -->
+  <div class="card" id="s2">
+    <div class="card-header" onclick="toggle('s2')">
+      <div class="num">2</div>
+      <div class="titles">
+        <strong>Site Overview / Vue d'ensemble</strong>
+        <small>General status & summary</small>
       </div>
-      <span class="chevron">▼</span>
+      <span class="arrow">▼</span>
     </div>
-    <div class="section-body">
+    <div class="card-body">
       <div class="field">
-        <label>General Progress Appreciation / Appréciation générale de l'avancement</label>
-        <div class="status-group">
-          <button class="status-pill active-green" onclick="selectStatus(this,'progress','on-track')" data-val="on-track">✅ On Track / En cours</button>
-          <button class="status-pill" onclick="selectStatus(this,'progress','delayed')" data-val="delayed">⚠️ Delayed / En retard</button>
-          <button class="status-pill" onclick="selectStatus(this,'progress','critical')" data-val="critical">🔴 Critical / Critique</button>
+        <label>Overall Progress / Avancement Général</label>
+        <div class="pills">
+          <button class="pill sel-green" onclick="pick(this,'overallStatus','on-track')">✅ On Track</button>
+          <button class="pill" onclick="pick(this,'overallStatus','delayed')">⚠️ Delayed</button>
+          <button class="pill" onclick="pick(this,'overallStatus','critical')">🔴 Critical</button>
         </div>
-        <input type="hidden" id="progressStatus" value="on-track">
+        <input type="hidden" id="overallStatus" value="on-track">
       </div>
       <div class="field">
-        <label>Weekly Summary / Résumé de la semaine <em>(2–4 sentences)</em></label>
-        <textarea id="weeklySummary" placeholder="Brief overview of main activities and any significant events this week. / Aperçu des activités principales et événements significatifs de la semaine."></textarea>
+        <label>Weekly Summary / Résumé</label>
+        <textarea id="summary" placeholder="Brief description of this week on site..."></textarea>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 3: WEATHER -->
-  <div class="section" data-section="3">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-num">3</div>
-      <div class="section-title">
+  <!-- 3. WEATHER -->
+  <div class="card" id="s3">
+    <div class="card-header" onclick="toggle('s3')">
+      <div class="num">3</div>
+      <div class="titles">
         <strong>Weather / Météo</strong>
-        <span>Conditions & impact on works</span>
+        <small>Conditions & impact on works</small>
       </div>
-      <span class="chevron">▼</span>
+      <span class="arrow">▼</span>
     </div>
-    <div class="section-body">
+    <div class="card-body">
       <div class="field">
-        <label>Weather Conditions / Conditions Météo</label>
-        <div class="status-group">
-          <button class="status-pill active-green" onclick="selectStatus(this,'weather','good')" data-val="good">☀️ Good / Bon</button>
-          <button class="status-pill" onclick="selectStatus(this,'weather','mixed')" data-val="mixed">🌤️ Mixed / Mitigé</button>
-          <button class="status-pill" onclick="selectStatus(this,'weather','poor')" data-val="poor">🌧️ Poor / Mauvais</button>
+        <label>Conditions</label>
+        <div class="pills">
+          <button class="pill sel-green" onclick="pick(this,'weatherStatus','good')">☀️ Good / Bon</button>
+          <button class="pill" onclick="pick(this,'weatherStatus','mixed')">🌤️ Mixed / Mitigé</button>
+          <button class="pill" onclick="pick(this,'weatherStatus','poor')">🌧️ Poor / Mauvais</button>
         </div>
         <input type="hidden" id="weatherStatus" value="good">
       </div>
       <div class="field">
         <label>Impact on Works / Impact sur les Travaux</label>
-        <textarea id="weatherImpact" rows="2" placeholder="Describe any weather-related impact on construction activities. / Décrire tout impact météo sur les activités de construction."></textarea>
+        <textarea id="weatherImpact" rows="2" placeholder="Any delays or issues caused by weather?"></textarea>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 4: WORKFORCE -->
-  <div class="section" data-section="4">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-num">4</div>
-      <div class="section-title">
+  <!-- 4. WORKFORCE -->
+  <div class="card" id="s4">
+    <div class="card-header" onclick="toggle('s4')">
+      <div class="num">4</div>
+      <div class="titles">
         <strong>Workforce / Main-d'œuvre</strong>
-        <span>Workers & contractors on site</span>
+        <small>Workers on site this week</small>
       </div>
-      <span class="chevron">▼</span>
+      <span class="arrow">▼</span>
     </div>
-    <div class="section-body">
+    <div class="card-body">
       <div class="field">
-        <label>Total Workers on Site / Total Travailleurs sur Site</label>
+        <label>Total Workers on Site / Total Ouvriers</label>
         <input type="number" id="totalWorkers" placeholder="e.g. 45" min="0">
       </div>
-      <div id="contractorList">
-        <label style="margin-bottom:8px">Contractors Mobilized / Entreprises Mobilisées</label>
-      </div>
-      <div id="contractorRows"></div>
-      <button class="add-btn" onclick="addContractor()">+ Add Contractor / Ajouter une entreprise</button>
     </div>
   </div>
 
-  <!-- SECTION 5: WORK PACKAGES -->
-  <div class="section" data-section="5">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-num">5</div>
-      <div class="section-title">
-        <strong>Construction Progress / Avancement des Travaux</strong>
-        <span>By work package — Par lot de travaux</span>
+  <!-- 5. CONSTRUCTION ACTIVITIES -->
+  <div class="card" id="s5">
+    <div class="card-header" onclick="toggle('s5')">
+      <div class="num">5</div>
+      <div class="titles">
+        <strong>Construction Activities / Activités</strong>
+        <small>Contractor + what they did + status</small>
       </div>
-      <span class="chevron">▼</span>
+      <span class="arrow">▼</span>
     </div>
-    <div class="section-body" id="workPackagesBody">
-      <!-- Generated by JS -->
+    <div class="card-body">
+      <div id="activityRows"></div>
+      <button class="add-btn" onclick="addActivity()">+ Add Activity / Ajouter une activité</button>
     </div>
   </div>
 
-  <!-- SECTION 6: DELIVERIES -->
-  <div class="section" data-section="6">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-num">6</div>
-      <div class="section-title">
-        <strong>Materials & Deliveries / Matériaux et Livraisons</strong>
-        <span>Supply & logistics overview</span>
+  <!-- 6. DELIVERIES -->
+  <div class="card" id="s6">
+    <div class="card-header" onclick="toggle('s6')">
+      <div class="num">6</div>
+      <div class="titles">
+        <strong>Deliveries / Livraisons</strong>
+        <small>Materials received & supply notes</small>
       </div>
-      <span class="chevron">▼</span>
+      <span class="arrow">▼</span>
     </div>
-    <div class="section-body">
+    <div class="card-body">
       <div class="field">
-        <label>Deliveries This Week / Livraisons Cette Semaine</label>
-        <textarea id="deliveries" placeholder="List main material deliveries received this week. Note any delays or issues. / Lister les livraisons de matériaux reçues cette semaine. Signaler tout retard ou problème."></textarea>
+        <label>Deliveries This Week / Livraisons</label>
+        <textarea id="deliveries" placeholder="What materials were received this week?"></textarea>
       </div>
       <div class="field">
-        <label>Supply Issues / Problèmes d'approvisionnement</label>
-        <textarea id="supplyIssues" rows="2" placeholder="Any supply shortages, pending deliveries, or logistics issues. / Pénuries, livraisons en attente ou problèmes logistiques."></textarea>
+        <label>Supply Issues / Problèmes</label>
+        <textarea id="supplyIssues" rows="2" placeholder="Any shortages or pending deliveries?"></textarea>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 7: RISKS -->
-  <div class="section" data-section="7">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-num">7</div>
-      <div class="section-title">
-        <strong>Risks & Constraints / Risques et Contraintes</strong>
-        <span>Issues that may affect progress</span>
+  <!-- 7. RISKS -->
+  <div class="card" id="s7">
+    <div class="card-header" onclick="toggle('s7')">
+      <div class="num">7</div>
+      <div class="titles">
+        <strong>Risks / Risques</strong>
+        <small>Issues that could affect progress</small>
       </div>
-      <span class="chevron">▼</span>
+      <span class="arrow">▼</span>
     </div>
-    <div class="section-body">
-      <div id="riskItems"></div>
-      <button class="add-btn" onclick="addRisk()">+ Add Risk / Ajouter un risque</button>
+    <div class="card-body">
+      <div class="field">
+        <label>Risks & Constraints / Risques et Contraintes</label>
+        <textarea id="risks" placeholder="Any risks or issues to flag this week?"></textarea>
+      </div>
     </div>
   </div>
 
-  <!-- SECTION 8: LOOK AHEAD -->
-  <div class="section" data-section="8">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-num">8</div>
-      <div class="section-title">
+  <!-- 8. LOOK AHEAD -->
+  <div class="card" id="s8">
+    <div class="card-header" onclick="toggle('s8')">
+      <div class="num">8</div>
+      <div class="titles">
         <strong>Look Ahead / Prévisions</strong>
-        <span>Upcoming activities — Activités à venir</span>
+        <small>Planned activities next week</small>
       </div>
-      <span class="chevron">▼</span>
+      <span class="arrow">▼</span>
     </div>
-    <div class="section-body">
+    <div class="card-body">
       <div class="field">
-        <label>Next Week's Main Activities / Activités Principales de la Semaine Prochaine</label>
-        <textarea id="lookAhead" placeholder="Describe the main construction activities planned for the coming week(s). / Décrire les activités de construction prévues pour la(les) semaine(s) à venir."></textarea>
+        <label>Next Week / Semaine Prochaine</label>
+        <textarea id="lookAhead" placeholder="What is planned for next week?"></textarea>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 9: PHOTOS -->
-  <div class="section" data-section="9">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-num">9</div>
-      <div class="section-title">
-        <strong>Photo Documentation / Documentation Photographique</strong>
-        <span>Site photos with captions</span>
+  <!-- 9. PHOTOS -->
+  <div class="card" id="s9">
+    <div class="card-header" onclick="toggle('s9')">
+      <div class="num">9</div>
+      <div class="titles">
+        <strong>Photos</strong>
+        <small>Site photos with captions</small>
       </div>
-      <span class="chevron">▼</span>
+      <span class="arrow">▼</span>
     </div>
-    <div class="section-body">
-      <p class="hint" style="margin-bottom:12px">Upload photos or use your camera. Add a caption for each photo. / Téléchargez des photos ou utilisez votre appareil photo. Ajoutez une légende à chaque photo.</p>
-      <div class="photo-upload-area" onclick="document.getElementById('photoInput').click()">
-        <input type="file" id="photoInput" accept="image/*" multiple capture="environment" onchange="handlePhotos(event)" style="display:none">
-        <div class="photo-upload-icon">📸</div>
-        <div class="photo-upload-text">
-          <strong>Tap to add photos / Appuyez pour ajouter des photos</strong>
+    <div class="card-body">
+      <div class="photo-drop" onclick="document.getElementById('photoInput').click()">
+        <input type="file" id="photoInput" accept="image/*" multiple onchange="addPhotos(event)" style="display:none">
+        <span class="icon">📸</span>
+        <div class="txt">
+          <strong>Tap to add photos</strong>
           Camera or gallery / Appareil photo ou galerie
         </div>
       </div>
-      <div id="photoList" style="margin-top:12px"></div>
+      <div class="photo-list" id="photoList"></div>
     </div>
   </div>
 
-</div>
+</div><!-- end wrap -->
 
-<!-- REPORT PREVIEW -->
-<div class="report-preview" id="reportView">
-  <button class="back-btn" onclick="showForm()">← Back to Form / Retour au formulaire</button>
-  <div class="report-content" id="reportContent">Generating report...</div>
-</div>
-
-<!-- GENERATE BUTTON -->
-<div class="generate-wrap" id="generateWrap">
-  <button class="generate-btn" id="generateBtn" onclick="generateReport()">
-    ⚡ Generate Report / Générer le Rapport
-  </button>
-</div>
-
-<!-- DOWNLOAD BUTTON (shown after generation) -->
-<div class="generate-wrap" id="downloadWrap" style="display:none">
-  <button class="download-btn" onclick="downloadReport()">
-    ⬇️ Download PDF / Télécharger PDF
+<!-- SUBMIT BUTTON -->
+<div class="submit-wrap">
+  <button class="submit-btn" id="submitBtn" onclick="submitReport()">
+    Submit Report / Soumettre le Rapport
   </button>
 </div>
 
 <!-- LOADING MODAL -->
-<div class="modal-overlay" id="loadingModal">
+<div class="overlay" id="loadingOverlay">
   <div class="modal">
-    <div class="modal-spinner"></div>
-    <h2>Generating Report / Génération en cours</h2>
-    <p>AI is formatting your weekly report in English and French.<br>Please wait a moment...<br><em>L'IA formate votre rapport hebdomadaire. Veuillez patienter...</em></p>
+    <div class="spinner"></div>
+    <h3>Saving to Google Drive...</h3>
+    <p>Please wait while your report is saved.<br><em>Enregistrement en cours...</em></p>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="overlay" id="successOverlay">
+  <div class="modal">
+    <div class="icon">✅</div>
+    <h3>Report Saved! / Rapport enregistré!</h3>
+    <p id="successMsg">Your report has been saved to Google Drive.<br><em>Votre rapport a été enregistré dans Google Drive.</em></p>
+    <button class="modal-btn" onclick="resetForm()">Submit Another / Nouveau Rapport</button>
   </div>
 </div>
 
 <!-- ERROR MODAL -->
-<div class="modal-overlay" id="errorModal">
+<div class="overlay" id="errorOverlay">
   <div class="modal">
-    <div class="modal-icon">⚠️</div>
-    <h2>Error / Erreur</h2>
-    <p id="errorMsg">Something went wrong. Please try again.<br><em>Une erreur s'est produite. Veuillez réessayer.</em></p>
-    <button class="modal-btn secondary" onclick="document.getElementById('errorModal').classList.remove('active')">Close / Fermer</button>
+    <div class="icon">⚠️</div>
+    <h3>Error / Erreur</h3>
+    <p id="errorMsg">Could not save. Please try again.<br><em>Impossible d'enregistrer. Réessayez.</em></p>
+    <button class="modal-btn sec" onclick="document.getElementById('errorOverlay').classList.remove('on')">Close / Fermer</button>
   </div>
 </div>
 
 <script>
+// ---- CONFIG: paste your Apps Script URL here after setup ----
+var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxih6ZbpZz09rNz5lStMewOWTuHLWROtrasGphPJu8tGCSMJGTT5Unp1Urgp1VniCx5/exec";
+// ------------------------------------------------------------
+
 var photos = [];
-var contractors = [];
-var risks = [];
+var activityCount = 0;
+var contractors = ['FLS Power','Blueprint','Easy Solar','Energy City','Innovent'];
 
-var workPackages = [
-  {id:'earthworks', en:'Earthworks & Civil Works', fr:'Terrassement et Génie Civil'},
-  {id:'pegblock', en:'Peg Block Installation', fr:'Installation des Blocs de Fixation'},
-  {id:'mounting', en:'Mounting Structure Installation', fr:'Installation des Structures de Montage'},
-  {id:'panels', en:'Solar Panel Installation', fr:'Installation des Panneaux Solaires'},
-  {id:'cabling', en:'Cabling / DC Works', fr:'Câblage / Travaux DC'},
-  {id:'inverter', en:'Inverter Installation', fr:'Installation des Onduleurs'},
-  {id:'acworks', en:'AC Works', fr:'Travaux AC'},
-  {id:'warehouse', en:'Warehouse Construction', fr:'Construction de l\'Entrepôt'}
-];
-
-var contractorOptions = ['FLS Power','Blueprint','Easy Solar','Energy City','Innovent'];
-
-// Init
 window.onload = function() {
   var today = new Date().toISOString().split('T')[0];
   document.getElementById('reportDate').value = today;
-  buildWorkPackages();
-  addContractor();
-  addRisk();
-  updateProgress();
+  addActivity();
 };
 
-function toggleSection(header) {
-  var section = header.parentElement;
-  section.classList.toggle('open');
+function toggle(id) {
+  document.getElementById(id).classList.toggle('open');
 }
 
-function selectStatus(btn, group, val) {
-  var parent = btn.parentElement;
-  var pills = parent.querySelectorAll('.status-pill');
-  pills.forEach(function(p) { p.className = 'status-pill'; });
-  if (val === 'on-track' || val === 'good') btn.classList.add('active-green');
-  else if (val === 'delayed' || val === 'mixed') btn.classList.add('active-orange');
-  else btn.classList.add('active-red');
-  document.getElementById(group === 'progress' ? 'progressStatus' : 'weatherStatus').value = val;
-}
-
-function buildWorkPackages() {
-  var body = document.getElementById('workPackagesBody');
-  body.innerHTML = '';
-  workPackages.forEach(function(wp) {
-    var div = document.createElement('div');
-    div.className = 'wp-card';
-    div.innerHTML = '<div class="wp-card-title">'+wp.en+' / '+wp.fr+'</div>'+
-      '<div class="field"><label>Contractor / Entreprise</label>'+
-      '<select id="wp_contractor_'+wp.id+'"><option value="">— Select —</option>'+
-      contractorOptions.map(function(c){return '<option>'+c+'</option>';}).join('')+
-      '</select></div>'+
-      '<div class="field"><label>Activities This Week / Activités Cette Semaine</label>'+
-      '<textarea id="wp_activities_'+wp.id+'" rows="2" placeholder="Describe work done. / Décrire les travaux réalisés."></textarea></div>'+
-      '<div class="field"><label>Progress Status / État d\'avancement</label>'+
-      '<div class="status-group">'+
-      '<button class="status-pill active-green" onclick="selectWPStatus(this,\''+wp.id+'\',\'on-track\')" data-val="on-track">✅ On Track</button>'+
-      '<button class="status-pill" onclick="selectWPStatus(this,\''+wp.id+'\',\'delayed\')" data-val="delayed">⚠️ Delayed</button>'+
-      '<button class="status-pill" onclick="selectWPStatus(this,\''+wp.id+'\',\'not-started\')" data-val="not-started">⏸ Not Started</button>'+
-      '</div>'+
-      '<input type="hidden" id="wp_status_'+wp.id+'" value="on-track">'+
-      '</div>';
-    body.appendChild(div);
+function pick(btn, fieldId, val) {
+  var group = btn.parentElement;
+  group.querySelectorAll('.pill').forEach(function(p) {
+    p.className = 'pill';
   });
+  if (val === 'on-track' || val === 'good') btn.classList.add('sel-green');
+  else if (val === 'delayed' || val === 'mixed') btn.classList.add('sel-orange');
+  else btn.classList.add('sel-red');
+  document.getElementById(fieldId).value = val;
 }
 
-function selectWPStatus(btn, wpId, val) {
-  var parent = btn.parentElement;
-  parent.querySelectorAll('.status-pill').forEach(function(p){ p.className = 'status-pill'; });
-  if (val === 'on-track') btn.classList.add('active-green');
-  else if (val === 'delayed') btn.classList.add('active-orange');
-  else btn.classList.add('active-red');
-  document.getElementById('wp_status_'+wpId).value = val;
-}
-
-function addContractor() {
-  var idx = contractors.length;
-  contractors.push({});
+function addActivity() {
+  var i = activityCount++;
   var div = document.createElement('div');
-  div.className = 'row-2 field';
-  div.id = 'contractor_row_'+idx;
-  div.style.alignItems = 'end';
-  div.innerHTML = '<div><select id="contractor_name_'+idx+'">'+
-    '<option value="">— Contractor —</option>'+
-    contractorOptions.map(function(c){return '<option>'+c+'</option>';}).join('')+
-    '</select></div>'+
-    '<div><input type="number" id="contractor_workers_'+idx+'" placeholder="# workers" min="0"></div>';
-  document.getElementById('contractorRows').appendChild(div);
+  div.className = 'activity-row';
+  div.id = 'act_' + i;
+  div.innerHTML =
+    '<button class="remove" onclick="removeActivity(\'act_'+i+'\')" title="Remove">✕</button>' +
+    '<div class="field">' +
+      '<label>Contractor / Entreprise</label>' +
+      '<select id="act_c_'+i+'">' +
+        '<option value="">— Select contractor —</option>' +
+        contractors.map(function(c){ return '<option>'+c+'</option>'; }).join('') +
+      '</select>' +
+    '</div>' +
+    '<div class="field">' +
+      '<label>Activity / Activité</label>' +
+      '<textarea id="act_a_'+i+'" rows="2" placeholder="What did they do this week?"></textarea>' +
+    '</div>' +
+    '<div class="field">' +
+      '<label>Status / Statut</label>' +
+      '<div class="pills">' +
+        '<button class="pill sel-green" onclick="pickAct(this,\'act_s_'+i+'\',\'on-track\')">✅ On Track</button>' +
+        '<button class="pill" onclick="pickAct(this,\'act_s_'+i+'\',\'delayed\')">⚠️ Delayed</button>' +
+        '<button class="pill" onclick="pickAct(this,\'act_s_'+i+'\',\'not-started\')">⏸ Not Started</button>' +
+      '</div>' +
+      '<input type="hidden" id="act_s_'+i+'" value="on-track">' +
+    '</div>';
+  document.getElementById('activityRows').appendChild(div);
 }
 
-function addRisk() {
-  var idx = risks.length;
-  risks.push({});
-  var div = document.createElement('div');
-  div.className = 'risk-item';
-  div.id = 'risk_'+idx;
-  div.innerHTML = '<div class="field"><label>Risk Description / Description du Risque</label>'+
-    '<textarea id="risk_desc_'+idx+'" rows="2" placeholder="Describe the risk or constraint. / Décrire le risque ou la contrainte."></textarea></div>'+
-    '<div class="field"><label>Severity / Gravité</label>'+
-    '<select id="risk_sev_'+idx+'"><option value="low">Low / Faible</option><option value="medium" selected>Medium / Moyen</option><option value="high">High / Élevé</option></select></div>';
-  document.getElementById('riskItems').appendChild(div);
+function removeActivity(id) {
+  var el = document.getElementById(id);
+  if (el) el.remove();
 }
 
-function handlePhotos(event) {
-  var files = Array.from(event.target.files);
-  files.forEach(function(file) {
+function pickAct(btn, fieldId, val) {
+  var group = btn.parentElement;
+  group.querySelectorAll('.pill').forEach(function(p){ p.className = 'pill'; });
+  if (val === 'on-track') btn.classList.add('sel-green');
+  else if (val === 'delayed') btn.classList.add('sel-orange');
+  else btn.classList.add('sel-red');
+  document.getElementById(fieldId).value = val;
+}
+
+function addPhotos(e) {
+  Array.from(e.target.files).forEach(function(file) {
     var reader = new FileReader();
-    reader.onload = function(e) {
-      photos.push({src: e.target.result, caption: ''});
+    reader.onload = function(ev) {
+      photos.push({ src: ev.target.result, caption: '' });
       renderPhotos();
     };
     reader.readAsDataURL(file);
   });
-  event.target.value = '';
+  e.target.value = '';
 }
 
 function renderPhotos() {
   var list = document.getElementById('photoList');
   list.innerHTML = '';
-  photos.forEach(function(photo, i) {
+  photos.forEach(function(p, i) {
     var div = document.createElement('div');
     div.className = 'photo-item';
-    div.innerHTML = '<div class="photo-thumb" style="width:80px;height:80px;display:inline-block;vertical-align:top;margin-right:10px">'+
-      '<img src="'+photo.src+'">'+
-      '<button class="remove-photo" onclick="removePhoto('+i+')">✕</button>'+
-      '</div>'+
-      '<div style="display:inline-block;vertical-align:top;width:calc(100% - 96px)">'+
-      '<label style="font-size:0.72rem;margin-bottom:4px">Caption / Légende (Photo '+(i+1)+')</label>'+
-      '<textarea class="photo-caption-input" rows="2" placeholder="Describe what is shown / Décrire ce qui est montré" onchange="updateCaption('+i+', this.value)">'+photo.caption+'</textarea>'+
-      '</div>';
+    div.innerHTML =
+      '<img src="'+p.src+'">' +
+      '<div class="cap">' +
+        '<input type="text" placeholder="Caption / Légende" value="'+p.caption+'" oninput="photos['+i+'].caption=this.value">' +
+      '</div>' +
+      '<button class="del" onclick="removePhoto('+i+')">✕</button>';
     list.appendChild(div);
   });
 }
@@ -908,229 +650,83 @@ function removePhoto(i) {
   renderPhotos();
 }
 
-function updateCaption(i, val) {
-  photos[i].caption = val;
-}
+function collectData() {
+  // Collect activities
+  var activities = [];
+  document.querySelectorAll('.activity-row').forEach(function(row) {
+    var id = row.id.replace('act_','');
+    var c = document.getElementById('act_c_'+id);
+    var a = document.getElementById('act_a_'+id);
+    var s = document.getElementById('act_s_'+id);
+    if (c && a && c.value) {
+      activities.push({
+        contractor: c.value,
+        activity: a ? a.value : '',
+        status: s ? s.value : 'on-track'
+      });
+    }
+  });
 
-function updateProgress() {
-  var fields = ['author','weekNum','reportDate','weeklySummary','weatherImpact','totalWorkers','deliveries','lookAhead'];
-  var filled = fields.filter(function(f){ var el=document.getElementById(f); return el && el.value.trim(); }).length;
-  var pct = Math.round((filled / fields.length) * 100);
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressLabel').textContent = pct + '% complete / complété';
-}
-
-document.addEventListener('input', updateProgress);
-document.addEventListener('change', updateProgress);
-
-function collectFormData() {
-  var data = {
-    author: document.getElementById('author').value,
-    weekNum: document.getElementById('weekNum').value,
-    reportDate: document.getElementById('reportDate').value,
-    periodFrom: document.getElementById('periodFrom').value,
-    periodTo: document.getElementById('periodTo').value,
-    progressStatus: document.getElementById('progressStatus').value,
-    weeklySummary: document.getElementById('weeklySummary').value,
+  return {
+    author:        document.getElementById('author').value,
+    weekNum:       document.getElementById('weekNum').value,
+    reportDate:    document.getElementById('reportDate').value,
+    dateFrom:      document.getElementById('dateFrom').value,
+    dateTo:        document.getElementById('dateTo').value,
+    overallStatus: document.getElementById('overallStatus').value,
+    summary:       document.getElementById('summary').value,
     weatherStatus: document.getElementById('weatherStatus').value,
     weatherImpact: document.getElementById('weatherImpact').value,
-    totalWorkers: document.getElementById('totalWorkers').value,
-    contractors: [],
-    workPackages: [],
-    deliveries: document.getElementById('deliveries').value,
-    supplyIssues: document.getElementById('supplyIssues').value,
-    risks: [],
-    lookAhead: document.getElementById('lookAhead').value,
-    photoCount: photos.length
+    totalWorkers:  document.getElementById('totalWorkers').value,
+    activities:    activities,
+    deliveries:    document.getElementById('deliveries').value,
+    supplyIssues:  document.getElementById('supplyIssues').value,
+    risks:         document.getElementById('risks').value,
+    lookAhead:     document.getElementById('lookAhead').value,
+    photos:        photos.map(function(p){ return { src: p.src, caption: p.caption }; })
   };
-
-  contractors.forEach(function(_, i) {
-    var name = document.getElementById('contractor_name_'+i);
-    var workers = document.getElementById('contractor_workers_'+i);
-    if (name && name.value) {
-      data.contractors.push({name: name.value, workers: workers ? workers.value : ''});
-    }
-  });
-
-  workPackages.forEach(function(wp) {
-    var activities = document.getElementById('wp_activities_'+wp.id);
-    var contractor = document.getElementById('wp_contractor_'+wp.id);
-    var status = document.getElementById('wp_status_'+wp.id);
-    data.workPackages.push({
-      nameEn: wp.en,
-      nameFr: wp.fr,
-      contractor: contractor ? contractor.value : '',
-      activities: activities ? activities.value : '',
-      status: status ? status.value : 'on-track'
-    });
-  });
-
-  risks.forEach(function(_, i) {
-    var desc = document.getElementById('risk_desc_'+i);
-    var sev = document.getElementById('risk_sev_'+i);
-    if (desc && desc.value.trim()) {
-      data.risks.push({desc: desc.value, severity: sev ? sev.value : 'medium'});
-    }
-  });
-
-  return data;
 }
 
-async function generateReport() {
-  var data = collectFormData();
-  document.getElementById('loadingModal').classList.add('active');
-  document.getElementById('generateBtn').disabled = true;
+async function submitReport() {
+  if (SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE") {
+    document.getElementById('errorMsg').textContent =
+      'Setup not complete. Please add your Apps Script URL to the form first.\n\nConfiguration incomplète. Ajoutez votre URL Apps Script.';
+    document.getElementById('errorOverlay').classList.add('on');
+    return;
+  }
 
-  var prompt = buildPrompt(data);
+  var data = collectData();
+  document.getElementById('loadingOverlay').classList.add('on');
+  document.getElementById('submitBtn').disabled = true;
 
   try {
-    var response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        messages: [{role: "user", content: prompt}]
-      })
+    var res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(data)
     });
+    var result = await res.json();
 
-    var result = await response.json();
-    var text = result.content.map(function(b){ return b.text || ''; }).join('');
+    document.getElementById('loadingOverlay').classList.remove('on');
+    document.getElementById('submitBtn').disabled = false;
 
-    document.getElementById('loadingModal').classList.remove('active');
-    document.getElementById('generateBtn').disabled = false;
-
-    showReportView(text, data);
-
+    if (result.status === 'ok') {
+      document.getElementById('successMsg').innerHTML =
+        'Report saved! <a href="'+result.docUrl+'" target="_blank" style="color:var(--sun)">Open in Google Drive ↗</a><br><em>Rapport enregistré dans Google Drive.</em>';
+      document.getElementById('successOverlay').classList.add('on');
+    } else {
+      throw new Error(result.message || 'Unknown error');
+    }
   } catch(err) {
-    document.getElementById('loadingModal').classList.remove('active');
-    document.getElementById('generateBtn').disabled = false;
-    document.getElementById('errorMsg').textContent = 'Error generating report. Check your connection and try again. / Erreur de génération. Vérifiez votre connexion et réessayez.\n\n' + err.message;
-    document.getElementById('errorModal').classList.add('active');
+    document.getElementById('loadingOverlay').classList.remove('on');
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('errorMsg').textContent = 'Error: ' + err.message;
+    document.getElementById('errorOverlay').classList.add('on');
   }
 }
 
-function buildPrompt(d) {
-  var wpText = d.workPackages.map(function(wp) {
-    return '- '+wp.nameEn+' / '+wp.nameFr+': Contractor: '+(wp.contractor||'N/A')+' | Status: '+wp.status+' | Activities: '+(wp.activities||'No update');
-  }).join('\n');
-
-  var contractorText = d.contractors.length ? d.contractors.map(function(c){ return c.name+(c.workers?' ('+c.workers+' workers)':''); }).join(', ') : 'Not specified';
-
-  var riskText = d.risks.length ? d.risks.map(function(r){ return '- '+r.desc+' ['+r.severity+']'; }).join('\n') : 'None identified';
-
-  return `You are a professional construction report writer for a solar power plant project in Sierra Leone called WISP (Waterloo Innovent Solar Park), managed by Innovent (French company). 
-
-Write a clean, professional weekly construction report in BOTH English and French. Structure it with clear section headers. The report is for the French management team.
-
-Use the following data collected from site:
-
-PROJECT INFO:
-- Author: ${d.author||'N/A'}
-- Week: ${d.weekNum||'N/A'} | Period: ${d.periodFrom||'N/A'} to ${d.periodTo||'N/A'}
-- Report Date: ${d.reportDate||'N/A'}
-- Project: WISP — Waterloo Solar Power Plant, Sierra Leone (30 MW)
-- Project Reference: P110
-
-SITE OVERVIEW:
-- Overall Progress: ${d.progressStatus}
-- Summary: ${d.weeklySummary||'No summary provided'}
-
-WEATHER:
-- Conditions: ${d.weatherStatus}
-- Impact: ${d.weatherImpact||'No significant impact'}
-
-WORKFORCE:
-- Total workers on site: ${d.totalWorkers||'N/A'}
-- Contractors: ${contractorText}
-
-CONSTRUCTION PROGRESS BY WORK PACKAGE:
-${wpText}
-
-MATERIALS & DELIVERIES:
-- Deliveries: ${d.deliveries||'No deliveries noted'}
-- Supply Issues: ${d.supplyIssues||'None'}
-
-RISKS & CONSTRAINTS:
-${riskText}
-
-LOOK AHEAD:
-${d.lookAhead||'Not specified'}
-
-PHOTOS: ${d.photoCount} photo(s) attached (not shown in text)
-
-Format the report as a clean professional document. Use this structure:
-1. Report Header (project name, week, period, author, date)
-2. Site Overview / Vue d'ensemble
-3. Weather / Météo
-4. Workforce / Main-d'œuvre
-5. Construction Progress / Avancement des Travaux
-6. Materials & Deliveries / Matériaux et Livraisons
-7. Risks & Constraints / Risques et Contraintes
-8. Look Ahead / Prévisions
-9. Photo Documentation note
-
-Write each section with the English version first, then the French version immediately below it, clearly separated. Keep it professional, concise and suitable for senior management review. Maximum 4 pages equivalent.`;
-}
-
-function showReportView(text, data) {
-  document.getElementById('formView').style.display = 'none';
-  document.getElementById('generateWrap').style.display = 'none';
-  document.getElementById('reportView').classList.add('active');
-  document.getElementById('downloadWrap').style.display = 'block';
-
-  var content = document.getElementById('reportContent');
-  content.textContent = text;
-
-  // Store for download
-  window._reportText = text;
-  window._reportData = data;
-}
-
-function showForm() {
-  document.getElementById('formView').style.display = 'block';
-  document.getElementById('generateWrap').style.display = 'block';
-  document.getElementById('reportView').classList.remove('active');
-  document.getElementById('downloadWrap').style.display = 'none';
-}
-
-function downloadReport() {
-  var text = window._reportText || '';
-  var data = window._reportData || {};
-
-  // Build HTML for printing as PDF
-  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8">'+
-    '<style>body{font-family:Arial,sans-serif;font-size:11pt;line-height:1.6;margin:40px;color:#1a1a1a;}'+
-    'h1{font-size:16pt;color:#1a4a7c;border-bottom:2px solid #F5A623;padding-bottom:8px;}'+
-    'h2{font-size:12pt;color:#1a4a7c;margin-top:20px;border-left:4px solid #F5A623;padding-left:8px;}'+
-    'pre{white-space:pre-wrap;font-family:Arial,sans-serif;}'+
-    '.header-box{background:#f5f5f5;border:1px solid #ddd;padding:12px;border-radius:4px;margin-bottom:20px;}'+
-    '@media print{@page{margin:20mm;}}</style>'+
-    '<title>WISP Weekly Report - Week '+data.weekNum+'</title></head><body>'+
-    '<div class="header-box">'+
-    '<strong>WISP — Waterloo Innovent Solar Park | Weekly Report / Rapport Hebdomadaire</strong><br>'+
-    'Week '+data.weekNum+' | '+data.periodFrom+' to '+data.periodTo+' | Author: '+data.author+
-    '</div>'+
-    '<pre>'+text+'</pre>';
-
-  // Append photos if any
-  if (photos.length > 0) {
-    html += '<h2>Photo Documentation / Documentation Photographique</h2>';
-    photos.forEach(function(p, i) {
-      html += '<div style="margin-bottom:16px;page-break-inside:avoid">'+
-        '<img src="'+p.src+'" style="max-width:100%;max-height:300px;border:1px solid #ddd;border-radius:4px">'+
-        '<p style="font-size:9pt;color:#555;margin-top:4px"><strong>Photo '+(i+1)+':</strong> '+(p.caption||'No caption')+'</p></div>';
-    });
-  }
-
-  html += '</body></html>';
-
-  var blob = new Blob([html], {type: 'text/html'});
-  var url = URL.createObjectURL(blob);
-  var win = window.open(url, '_blank');
-  if (win) {
-    win.onload = function() { win.print(); };
-  }
+function resetForm() {
+  document.getElementById('successOverlay').classList.remove('on');
+  location.reload();
 }
 </script>
 </body>
